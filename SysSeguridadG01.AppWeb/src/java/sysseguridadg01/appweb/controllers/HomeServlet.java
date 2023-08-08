@@ -28,7 +28,8 @@ public class HomeServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void doGetResquestIndex(HttpServletRequest request, HttpServletResponse response)
+    protected void doGetResquestIndex(HttpServletRequest request, 
+            HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package sysseguridadg01.appweb.controllers;
 
 import java.io.IOException;
@@ -12,11 +8,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.util.ArrayList;
+import sysseguridadg01.accesoadatos.RolDAL;
+import sysseguridadg01.entidadesdenegocio.Rol;
+import sysseguridadg01.appweb.utils.*;
+
 /**
  *
  * @author victo
  */
-@WebServlet(name = "RolServlet", urlPatterns = {"/RolServlet"})
+@WebServlet(name = "RolServlet", urlPatterns = {"/Rol"})
 public class RolServlet extends HttpServlet {
 
     /**
@@ -28,20 +29,88 @@ public class RolServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    private Rol obtenerRol(HttpServletRequest request)
+    {
+        String accion = Utilidad.getParameter(request, "accion", "index");
+        Rol rol = new Rol();
+        if(accion.equals("create") == false)
+        {
+            //Obtiene el parametro de Id del request y asigna el valor a la propiedad 
+            //Id de la instancia
+            rol.setId(Integer.parseInt(Utilidad.getParameter(request, "id",
+                    "0")));
+        }
+        rol.setNombre(Utilidad.getParameter(request, "nombre", ""));
+        if(accion.equals("index"))
+        {
+            rol.setTop_aux(Integer.parseInt(Utilidad.getParameter(request, 
+                    "top_aux", "10")));
+            rol.setTop_aux(rol.getTop_aux() == 0 ? Integer.MAX_VALUE: rol.getTop_aux());
+        }
+        return rol;
+    }
+    
+    protected void doGetRequestIndex(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RolServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RolServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try
+        {
+            Rol rol = new Rol();
+            rol.setTop_aux(10);
+            ArrayList<Rol> roles = RolDAL.buscar(rol);
+            request.setAttribute("roles", roles);
+            request.setAttribute("top_aux", rol.getTop_aux());
+            request.getRequestDispatcher("Views/Rol/index.jsp")
+                    .forward(request, response);
+        }
+        catch(Exception ex)
+        {
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
+    }
+    
+    protected void doPostRequestIndex(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try
+        {
+            Rol rol = obtenerRol(request);
+            ArrayList<Rol> roles = RolDAL.buscar(rol);
+            request.setAttribute("roles", roles);
+            request.setAttribute("top_aux", rol.getTop_aux());
+            request.getRequestDispatcher("Views/Rol/index.jsp")
+                    .forward(request, response);
+        }
+        catch(Exception ex)
+        {
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
+    }
+    
+    protected void doGetRequestCreate(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            request.getRequestDispatcher("Views/Rol/create.jsp")
+                    .forward(request, response);
+    }
+    
+    protected void doPostRequestCreate(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try
+        {
+            Rol rol = obtenerRol(request);
+            int result = RolDAL.crear(rol);
+            if(result != 0)
+            {
+                request.setAttribute("accion", "index");
+                doGetRequestIndex(request, response);
+            }
+            else
+            {
+                Utilidad.enviarError("Error al Guardar el Regisgtro", request, response);
+            }
+
+        }
+        catch(Exception ex)
+        {
+            Utilidad.enviarError(ex.getMessage(), request, response);
         }
     }
 
@@ -57,7 +126,7 @@ public class RolServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /**
@@ -71,17 +140,6 @@ public class RolServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
