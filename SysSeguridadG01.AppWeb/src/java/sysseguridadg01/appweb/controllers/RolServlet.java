@@ -113,6 +113,58 @@ public class RolServlet extends HttpServlet {
             Utilidad.enviarError(ex.getMessage(), request, response);
         }
     }
+    
+    protected void requestObtenerPorId(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try
+        {
+            Rol rol = obtenerRol(request);
+            Rol rol_result = RolDAL.obtenerPorId(rol);
+            if(rol_result.getId() > 0)
+            {
+                request.setAttribute("rol", rol_result);
+            }
+            else
+            {
+                Utilidad.enviarError("El id: " + rol.getId() + " no existe en la tabla rol", 
+                        request, response);
+            }
+        }
+        catch(Exception ex)
+        {
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
+    }
+    
+    protected void doGetRequestEdit(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            requestObtenerPorId(request, response);
+            request.getRequestDispatcher("Views/Rol/edit.jsp")
+                    .forward(request, response);
+    }
+    
+    protected void doPostRequestEdit(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try
+        {
+            Rol rol = obtenerRol(request);
+            int result = RolDAL.modificar(rol);
+            if(result != 0)
+            {
+                request.setAttribute("accion", "index");
+                doGetRequestIndex(request, response);
+            }
+            else
+            {
+                Utilidad.enviarError("Error al Guardar el Regisgtro", request, response);
+            }
+
+        }
+        catch(Exception ex)
+        {
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
