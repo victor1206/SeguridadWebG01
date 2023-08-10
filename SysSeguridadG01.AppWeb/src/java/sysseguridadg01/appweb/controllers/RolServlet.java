@@ -259,7 +259,7 @@ public class RolServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SessionUser.authorize(request, response, () -> {
+        //SessionUser.authorize(request, response, () -> {
             String accion = Utilidad.getParameter(request, 
                     "accion", "index");
             switch(accion)
@@ -285,6 +285,6 @@ public class RolServlet extends HttpServlet {
                     doGetRequestIndex(request, response);
                     break;
             }
-        });
+        //});
     }
 }

@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sysseguridadg01.appweb.utils.*"%>
 <% //if (SessionUser.isAuth(request) == false) {
-         response.sendRedirect("Rol?accion=index");
+         response.sendRedirect("Rol?accion=create");
     //}
 %>
 <!DOCTYPE html>

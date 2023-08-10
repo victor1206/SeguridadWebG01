@@ -47,7 +47,7 @@
                </div>
                <div class="row">
                    <div class="input-field col 16 s12">
-                       <button type="sutmit" class="waves-effect waves-ligth btn blue">Buscar</button>
+                       <button type="submit" class="waves-effect waves-ligth btn blue">Buscar</button>
                        <a href="Rol?accion=create" class="waves-effect waves-ligth btn blue">Nuevo</a>
                    </div>
                </div>
@@ -64,12 +64,50 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                <%
+                                for(Rol rol:roles)
+                                {
+                                   int tempNumPage = numPage;
+                                   if(numPage > 1)
+                                   {
+                                        countReg++;
+                                        double divTempNumPage = (double) countReg / (double) numReg;
+                                        tempNumPage = (int) Math.ceil(divTempNumPage);
+                                   }
+                                %>
+                                    <tr data-page="<%=tempNumPage%>">
+                                        <td><%=rol.getNombre()%></td>
+                                        <td>
+                                            <div style="display: flex">
+                                                <a href="Rol?accion=edit&id=<%=rol.getId()%>" 
+                                                   title="Mofificar" class="waves-effect waves-light btn green">
+                                                    <i class="material-icons">edit</i>
+                                                </a>
+                                                <a href="Rol?accion=details&id=<%=rol.getId()%>" 
+                                                   title="Ver" class="waves-effect waves-light btn blue">
+                                                    <i class="material-icons">description</i>
+                                                </a>
+                                                <a href="Rol?accion=delete&id=<%=rol.getId()%>" 
+                                                   title="Eliminar" class="waves-effect waves-light btn red">
+                                                    <i class="material-icons">delete</i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr> 
+                                <%}%>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col 112 s12">
+                    <jsp:include page="/Views/Shared/paginacion.jsp">
+                        <jsp:param name="numPage" value="<%=numPage%>"/>
+                    </jsp:include> 
+                </div>
+            </div>
         </main>
+        <jsp:include page="/Views/Shared/footerBody.jsp" />
     </body>
 </html>

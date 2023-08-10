@@ -23,7 +23,7 @@ public class ComunDB {
     static String connectionURL = "jdbc:sqlserver://localhost:1433;"
             + "database=DbPracticaG01;"
             + "user=sa;"
-            + "password=;"
+            + "password=Vanessa0820@1989;"
             + "loginTimeout=30;encrypt=false;trustServerCertificate=false";
             //+ "integratedSecurity=true";
     
