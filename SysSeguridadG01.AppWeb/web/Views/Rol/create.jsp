@@ -10,7 +10,7 @@
         <main>
             <h5>Crear Rol</h5>
             <form action="Rol" method="post">
-                <input type="text" name="accion" 
+                <input type="hidden" name="accion" 
                        value="<%=request.getAttribute("accion")%>" id="txtHidden">
                 <div class="row">
                     <div class="input-field col 14 s12">
