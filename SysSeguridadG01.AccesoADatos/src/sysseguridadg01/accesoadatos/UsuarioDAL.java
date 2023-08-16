@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.*;
 import java.time.LocalDate;
 import sysseguridadg01.entidadesdenegocio.Usuario;
-import sysseguridadg01.entidadesdenegocio.Usuario.EstatusUsuario;
+//import sysseguridadg01.entidadesdenegocio.Usuario.EstatusUsuario;
 
 
 public class UsuarioDAL {
