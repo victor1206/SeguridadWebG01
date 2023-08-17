@@ -14,13 +14,10 @@
         </group>
         <group name="SysSeguridadG01">
             <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/src/java/sysseguridadg01/appweb/controllers/RolServlet.java</file>
-            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Rol/create.jsp</file>
-            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Rol/edit.jsp</file>
-            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Rol/details.jsp</file>
-            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Rol/index.jsp</file>
-            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Rol/select.jsp</file>
-            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Rol/delete.jsp</file>
+            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Usuario/index.jsp</file>
             <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/src/java/sysseguridadg01/appweb/utils/SessionUser.java</file>
+            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/src/java/sysseguridadg01/appweb/controllers/UsuarioServlet.java</file>
+            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Rol/index.jsp</file>
         </group>
     </open-files>
 </project-private>

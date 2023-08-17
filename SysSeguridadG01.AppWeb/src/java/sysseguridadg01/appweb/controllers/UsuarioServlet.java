@@ -87,7 +87,38 @@ public class UsuarioServlet extends HttpServlet {
     
     protected void doGetRequestIndex(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("Views/Rol/create.jsp").forward(request, response);
+        try
+        {
+            Usuario usuario = new Usuario();
+            usuario.setTop_aux(10);
+            ArrayList<Usuario> usuarios = UsuarioDAL.buscarIncluirRol(
+                                    usuario);
+            request.setAttribute("usuarios", usuarios);
+            request.setAttribute("top_aux", usuario.getTop_aux());
+            request.getRequestDispatcher("Views/Usuario/index.jsp").forward(request, response);
+        }
+        catch(Exception ex)
+        {
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
+    }
+    
+    protected void doPostRequestIndex(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try
+        {
+            Usuario usuario = new Usuario();
+            usuario.setTop_aux(10);
+            ArrayList<Usuario> usuarios = UsuarioDAL.buscarIncluirRol(
+                                    usuario);
+            request.setAttribute("usuarios", usuarios);
+            request.setAttribute("top_aux", usuario.getTop_aux());
+            request.getRequestDispatcher("Views/Usuario/index.jsp").forward(request, response);
+        }
+        catch(Exception ex)
+        {
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
     }
     
     protected void doGetRequestLogin(HttpServletRequest request, HttpServletResponse response)
@@ -144,6 +175,18 @@ public class UsuarioServlet extends HttpServlet {
             request.setAttribute("accion", accion);
             doGetRequestLogin(request, response);
         }
+        else
+        {
+            SessionUser.authorize(request, response, () -> {
+                switch(accion)
+                {
+                    case "index":
+                        request.setAttribute("accion", accion);
+                        doGetRequestIndex(request,response);
+                        break;
+                }
+            });
+        }
     }
 
     /**
@@ -163,6 +206,18 @@ public class UsuarioServlet extends HttpServlet {
         {
             request.setAttribute("accion", accion);
             doPostRequestLogin(request, response);
+        }
+        else
+        {
+            SessionUser.authorize(request, response, () -> {
+                switch(accion)
+                {
+                    case "index":
+                        request.setAttribute("accion", accion);
+                        doPostRequestIndex(request,response);
+                        break;
+                }
+            });
         }
     }
 
