@@ -116,7 +116,7 @@ public static String encriptarMD5(String txt) throws Exception
                 try(PreparedStatement st = 
                     ComunDB.createPreparedStatement(conn, sql);)
                 {
-                    st.setInt(1, pUsuario.getId());
+                    st.setInt(1, pUsuario.getIdRol());
                     st.setString(2, pUsuario.getNombre());
                     st.setString(3, pUsuario.getApellido());
                     st.setString(4, pUsuario.getLogin());

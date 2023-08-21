@@ -14,7 +14,8 @@ public class SysSeguridadG01AppDesktop {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        FrmLogin frmLogin = new FrmLogin();
+        frmLogin.setVisible(true);
     }
     
 }

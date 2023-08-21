@@ -83,6 +83,11 @@
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Login</th>
+                                    <th>Estatus</th>
+                                    <th>Rol</th>
+                                    <th>Fecha Registro</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -97,9 +102,27 @@
                                         double divTempNumPage = (double) countReg / (double) numReg;
                                         tempNumPage = (int) Math.ceil(divTempNumPage);
                                    }
+                                   
+                                   String estatus = "";
+                                   switch(usuario.getEstatus())
+                                   {
+                                        case 1:
+                                            estatus = "ACTIVO";
+                                            break;
+                                        case 2:
+                                            estatus = "INACTIVO";
+                                            break;
+                                        default:
+                                            estatus = "";
+                                   }
                                 %>
                                     <tr data-page="<%=tempNumPage%>">
                                         <td><%=usuario.getNombre()%></td>
+                                        <td><%=usuario.getApellido()%></td>
+                                        <td><%=usuario.getLogin()%></td>
+                                        <td><%=estatus%></td>
+                                        <td><%=usuario.getRol().getNombre()%></td>
+                                        <td><%=usuario.getFechaRegistro()%></td>
                                         <td>
                                             <div style="display: flex">
                                                 <a href="Usuario?accion=edit&id=<%=usuario.getId()%>" 

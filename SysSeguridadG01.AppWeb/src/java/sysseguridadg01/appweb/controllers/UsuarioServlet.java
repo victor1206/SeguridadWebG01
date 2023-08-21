@@ -155,6 +155,35 @@ public class UsuarioServlet extends HttpServlet {
             request.setAttribute("error", ex.getMessage());
         }
     }
+    
+    protected void doGetRequestCreate(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            request.getRequestDispatcher("Views/Usuario/create.jsp")
+                    .forward(request, response);
+    }
+    
+    protected void doPostRequestCreate(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try
+        {
+            Usuario usuario = obtenerUsuario(request);
+            int result = UsuarioDAL.crear(usuario);
+            if(result != 0)
+            {
+                request.setAttribute("accion", "index");
+                doGetRequestIndex(request, response);
+            }
+            else
+            {
+                Utilidad.enviarError("Error al Guardar el Regisgtro", request, response);
+            }
+
+        }
+        catch(Exception ex)
+        {
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -183,6 +212,10 @@ public class UsuarioServlet extends HttpServlet {
                     case "index":
                         request.setAttribute("accion", accion);
                         doGetRequestIndex(request,response);
+                        break;
+                    case "create":
+                        request.setAttribute("accion", accion);
+                        doGetRequestCreate(request,response);
                         break;
                 }
             });
@@ -215,6 +248,10 @@ public class UsuarioServlet extends HttpServlet {
                     case "index":
                         request.setAttribute("accion", accion);
                         doPostRequestIndex(request,response);
+                        break;
+                    case "create":
+                        request.setAttribute("accion", accion);
+                        doPostRequestCreate(request,response);
                         break;
                 }
             });
