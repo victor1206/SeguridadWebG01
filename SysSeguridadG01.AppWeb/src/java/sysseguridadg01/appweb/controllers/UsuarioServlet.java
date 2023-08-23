@@ -184,6 +184,61 @@ public class UsuarioServlet extends HttpServlet {
             Utilidad.enviarError(ex.getMessage(), request, response);
         }
     }
+    
+    protected void requestObtenerPorId(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try
+        {
+            Usuario usuario = obtenerUsuario(request);
+            Usuario usuario_result = UsuarioDAL.obtenerPorId(usuario);
+            if(usuario_result.getId() > 0)
+            {
+                Rol rol = new Rol();
+                rol.setId(usuario_result.getIdRol());
+                usuario_result.setRol(RolDAL.obtenerPorId(rol));
+                request.setAttribute("usuario", usuario_result);
+            }
+            else
+            {
+                Utilidad.enviarError("El Id: " + usuario_result.getId() 
+                + " no existe en la base de datos", request, response);
+            }
+        }
+        catch(Exception ex)
+        {
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
+    }
+    
+    protected void doGetRequestEdit(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            requestObtenerPorId(request,response);
+            request.getRequestDispatcher("Views/Usuario/edit.jsp")
+                    .forward(request, response);
+    }
+    
+    protected void doPostRequestEdit(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try
+        {
+            Usuario usuario = obtenerUsuario(request);
+            int result = UsuarioDAL.modificar(usuario);
+            if(result != 0)
+            {
+                request.setAttribute("accion", "index");
+                doGetRequestIndex(request, response);
+            }
+            else
+            {
+                Utilidad.enviarError("Error al Actualizar el Regisgtro", request, response);
+            }
+
+        }
+        catch(Exception ex)
+        {
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -216,6 +271,10 @@ public class UsuarioServlet extends HttpServlet {
                     case "create":
                         request.setAttribute("accion", accion);
                         doGetRequestCreate(request,response);
+                        break;
+                    case "edit":
+                        request.setAttribute("accion", accion);
+                        doGetRequestEdit(request,response);
                         break;
                 }
             });
@@ -252,6 +311,10 @@ public class UsuarioServlet extends HttpServlet {
                     case "create":
                         request.setAttribute("accion", accion);
                         doPostRequestCreate(request,response);
+                        break;
+                    case "edit":
+                        request.setAttribute("accion", accion);
+                        doPostRequestEdit(request,response);
                         break;
                 }
             });
