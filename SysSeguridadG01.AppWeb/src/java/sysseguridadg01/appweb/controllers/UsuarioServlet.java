@@ -239,6 +239,13 @@ public class UsuarioServlet extends HttpServlet {
             Utilidad.enviarError(ex.getMessage(), request, response);
         }
     }
+    
+    protected void doGetRequestDetails(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            requestObtenerPorId(request,response);
+            request.getRequestDispatcher("Views/Usuario/details.jsp")
+                    .forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -275,6 +282,10 @@ public class UsuarioServlet extends HttpServlet {
                     case "edit":
                         request.setAttribute("accion", accion);
                         doGetRequestEdit(request,response);
+                        break;
+                    case "details":
+                        request.setAttribute("accion", accion);
+                        doGetRequestDetails(request,response);
                         break;
                 }
             });
