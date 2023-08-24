@@ -246,6 +246,90 @@ public class UsuarioServlet extends HttpServlet {
             request.getRequestDispatcher("Views/Usuario/details.jsp")
                     .forward(request, response);
     }
+    
+    protected void doGetRequestDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            requestObtenerPorId(request,response);
+            request.getRequestDispatcher("Views/Usuario/delete.jsp")
+                    .forward(request, response);
+    }
+    
+    protected void doPostRequestDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try
+        {
+            Usuario usuario = obtenerUsuario(request);
+            int result = UsuarioDAL.eliminar(usuario);
+            if(result != 0)
+            {
+                request.setAttribute("accion", "index");
+                doGetRequestIndex(request, response);
+            }
+            else
+            {
+                Utilidad.enviarError("Error al Eliminar el Regisgtro", request, response);
+            }
+
+        }
+        catch(Exception ex)
+        {
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
+    }
+    
+    protected void doGetRequestCambiarPassword(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try
+        {
+            Usuario usuario = new Usuario();
+            //Buscar el usuario que esta logeado y obtiene el login de la 
+            //variable de session ViDuran
+            usuario.setLogin(SessionUser.getUser(request));
+            Usuario usuario_result = UsuarioDAL.buscar(usuario)
+                    .get(0);
+            if(usuario_result.getId() > 0)
+            {
+                request.setAttribute("usuario", usuario_result);
+                request.getRequestDispatcher(
+                        "Views/Usuario/cambiarPassword.jsp")
+                    .forward(request, response);
+            }
+            else
+            {
+                Utilidad.enviarError("El login: " + usuario_result.getLogin() +
+                        "no existe en la Base de Datos", request, response);
+            }
+        }
+        catch(Exception ex)
+        {
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
+    }
+    
+    protected void doPostCambiarPassword(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try
+        {
+            Usuario usuario = obtenerUsuario(request);
+            String passActual = Utilidad.getParameter(request,
+                    "passwordActual", "");
+            int result = UsuarioDAL.cambiarPassword(usuario, 
+                    passActual);
+            if(result != 0)
+            {
+                response.sendRedirect("Usuario?accion=login");
+            }
+            else
+            {
+                Utilidad.enviarError("Error al cambiar el Password", request, response);
+            }
+
+        }
+        catch(Exception ex)
+        {
+            Utilidad.enviarError(ex.getMessage(), request, response);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -287,6 +371,14 @@ public class UsuarioServlet extends HttpServlet {
                         request.setAttribute("accion", accion);
                         doGetRequestDetails(request,response);
                         break;
+                    case "delete":
+                        request.setAttribute("accion", accion);
+                        doGetRequestDelete(request,response);
+                        break;
+                    case "cambiarpass":
+                        request.setAttribute("accion", accion);
+                        doGetRequestCambiarPassword(request,response);
+                        break;
                 }
             });
         }
@@ -326,6 +418,14 @@ public class UsuarioServlet extends HttpServlet {
                     case "edit":
                         request.setAttribute("accion", accion);
                         doPostRequestEdit(request,response);
+                        break;
+                    case "delete":
+                        request.setAttribute("accion", accion);
+                        doPostRequestDelete(request,response);
+                        break;
+                    case "cambiarpass":
+                        request.setAttribute("accion", accion);
+                        doPostCambiarPassword(request,response);
                         break;
                 }
             });
