@@ -15,6 +15,7 @@ public class FrmInicio extends javax.swing.JFrame {
      */
     public FrmInicio() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH); // Colocar la pantalla maximizada al inicio
     }
 
     /**
@@ -26,21 +27,75 @@ public class FrmInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        meInicio = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        meRol = new javax.swing.JMenuItem();
+        meUsuario = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jMenu1.setText("Mantenimiento");
+
+        meRol.setText("Rol");
+        meRol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meRolActionPerformed(evt);
+            }
+        });
+        jMenu1.add(meRol);
+
+        meUsuario.setText("Usuario");
+        meUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meUsuarioActionPerformed(evt);
+            }
+        });
+        jMenu1.add(meUsuario);
+
+        meInicio.add(jMenu1);
+
+        jMenu3.setText("jMenu3");
+
+        jMenuItem1.setText("jMenuItem1");
+        jMenu3.add(jMenuItem1);
+
+        meInicio.add(jMenu3);
+
+        jMenu4.setText("jMenu4");
+        meInicio.add(jMenu4);
+
+        jMenu2.setText("Salir");
+        meInicio.add(jMenu2);
+
+        setJMenuBar(meInicio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 727, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 432, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void meUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_meUsuarioActionPerformed
+
+    private void meRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meRolActionPerformed
+        FrmRolLec frmRolLec = new FrmRolLec(this);
+        frmRolLec.setVisible(true);
+        this.setEnabled(false);
+    }//GEN-LAST:event_meRolActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +133,13 @@ public class FrmInicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuBar meInicio;
+    private javax.swing.JMenuItem meRol;
+    private javax.swing.JMenuItem meUsuario;
     // End of variables declaration//GEN-END:variables
 }
