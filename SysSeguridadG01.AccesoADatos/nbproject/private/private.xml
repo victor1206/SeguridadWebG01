@@ -8,7 +8,10 @@
         </group>
         <group name="SysSeguridadG01">
             <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AccesoADatos/src/sysseguridadg01/accesoadatos/UsuarioDAL.java</file>
+            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AccesoADatos/test/sysseguridadg01/accesoadatos/RolDALTest.java</file>
+            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AccesoADatos/test/sysseguridadg01/accesoadatos/ComunDBTest.java</file>
             <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AccesoADatos/src/sysseguridadg01/accesoadatos/RolDAL.java</file>
+            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AccesoADatos/src/sysseguridadg01/accesoadatos/ComunDB.java</file>
         </group>
     </open-files>
 </project-private>

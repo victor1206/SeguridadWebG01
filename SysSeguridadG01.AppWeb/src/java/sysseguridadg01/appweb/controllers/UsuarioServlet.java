@@ -140,6 +140,8 @@ public class UsuarioServlet extends HttpServlet {
                 rol.setId(usuario_auth.getIdRol());
                 usuario_auth.setRol(RolDAL.obtenerPorId(rol));
                 SessionUser.autenticarUser(request, usuario_auth);
+                String userLogs = SessionUser.getUser(request);
+                request.setAttribute("userlog", userLogs);
                 response.sendRedirect("Home");
             }
             else

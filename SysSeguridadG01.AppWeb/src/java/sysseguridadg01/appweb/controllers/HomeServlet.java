@@ -31,6 +31,8 @@ public class HomeServlet extends HttpServlet {
     protected void doGetResquestIndex(HttpServletRequest request, 
             HttpServletResponse response)
             throws ServletException, IOException {
+        var us = request.getAttribute("userlog");
+        request.setAttribute("userIni", request.getAttribute("userlog"));
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 

@@ -15,11 +15,14 @@
         <group name="SysSeguridadG01">
             <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Usuario/edit.jsp</file>
             <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Shared/headerBody.jsp</file>
+            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/src/java/sysseguridadg01/appweb/controllers/HomeServlet.java</file>
             <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Usuario/index.jsp</file>
+            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/src/java/sysseguridadg01/appweb/utils/SessionUser.java</file>
             <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Usuario/details.jsp</file>
             <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/src/java/sysseguridadg01/appweb/controllers/UsuarioServlet.java</file>
             <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Shared/title.jsp</file>
             <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Usuario/cambiarPassword.jsp</file>
+            <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/index.jsp</file>
             <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Usuario/create.jsp</file>
             <file>file:/C:/Users/victo/Documents/SysSeguridadG01/SysSeguridadG01.AppWeb/web/Views/Usuario/delete.jsp</file>
         </group>

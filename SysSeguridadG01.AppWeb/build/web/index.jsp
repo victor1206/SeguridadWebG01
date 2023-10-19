@@ -3,6 +3,7 @@
 <% if (SessionUser.isAuth(request) == false) {
          response.sendRedirect("Usuario?accion=login");
     }
+   
 %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,7 @@
         <main class="container"> 
             <div class="row">
                 <div class="col l12 s12">
-                    <h1>Bienvenidos</h1> 
+                    <h1>Bienvenidos <%= request.getAttribute("userIni")%></h1> 
                     <span>Al sistema para aprender a como colocarle seguridad a sus aplicaciones web</span> 
                 </div>
             </div>            
